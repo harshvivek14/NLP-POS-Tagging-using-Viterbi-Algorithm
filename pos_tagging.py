@@ -23,6 +23,7 @@ from sklearn.metrics import (
 )
 
 import nltk
+nltk.download('treebank')
 nltk.download('universal_tagset')
 
 from nltk.corpus import treebank
