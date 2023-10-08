@@ -6,7 +6,7 @@
 ### Data Collection
 
 
-import nltk
+
 import numpy as np
 import pandas as pd
 import random
@@ -22,8 +22,11 @@ from sklearn.metrics import (
     f1_score
 )
 
-# reading the Treebank tagged sentences
+import nltk
 nltk.download('universal_tagset')
+
+from nltk.corpus import treebank
+
 # we are using universal tagset as mentioned in the assignment requirements
 data = list(nltk.corpus.treebank.tagged_sents(tagset='universal'))
 
