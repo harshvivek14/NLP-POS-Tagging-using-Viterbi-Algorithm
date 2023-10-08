@@ -190,9 +190,12 @@ def predict_POS(sent):
 predict_POS('You are not so looking well')
 
 st.title("POS Tagging using Viterbi Algorithm") 
+st.title("Wait for few seconds.. Data loading..") 
 input = st.text_input("Enter the sentence 👇🏻") 
 output = predict_POS(input)
 if input:
-    st.write("POS tagging", output[0])
+    st.write("POS tagging")
+    for i in output[0]:
+        st.write(str(i[0]) + ' - ' + str(i[1]))
 
 
