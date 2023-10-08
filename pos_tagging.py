@@ -192,6 +192,6 @@ predict_POS('You are not so looking well')
 st.title("POS Tagging using Viterbi Algorithm") 
 input = st.text_input("Enter the sentence 👇🏻") 
 output = predict_POS(input)
-st.write("POS tagging", output)
+st.write("POS tagging", str(output))
 
 
