@@ -193,6 +193,6 @@ st.title("POS Tagging using Viterbi Algorithm")
 input = st.text_input("Enter the sentence 👇🏻") 
 output = predict_POS(input)
 if input:
-    st.write("POS tagging", str(output[0]))
+    st.write("POS tagging", output[0])
 
 
