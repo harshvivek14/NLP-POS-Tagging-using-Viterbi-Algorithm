@@ -185,7 +185,7 @@ def predict_POS(sent):
   words = []
   train_tagged_words, test_tagged_words, train_tagged_tokens, train_tagged_pos_tokens, training_vocabulary_set, training_pos_tag_set = get_words(data, [])
   words.append(Viterbi(sent.split(), train_tagged_words, create_transition_matrix(training_pos_tag_set, training_vocabulary_set, train_tagged_words)))
-  print(words)
+  return(words)
 
 predict_POS('You are not so looking well')
 
