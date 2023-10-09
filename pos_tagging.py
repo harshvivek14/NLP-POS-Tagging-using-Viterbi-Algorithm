@@ -130,55 +130,9 @@ def Viterbi(words, train_tagged_words, tags_df):
         state.append(state_max)
     return list(zip(words, state))
 
-def confusion_matrix_creation(test_run_base, tagged_seq):
-    test_data_tags = []
-    for i in test_run_base:
-        test_data_tags.append(i[1])
-    pred_tags = []
-    for i in tagged_seq:
-        pred_tags.append(i[1])
-    confusion_matrix = metrics.confusion_matrix(test_data_tags, pred_tags)
-    cm_display = metrics.ConfusionMatrixDisplay(confusion_matrix = confusion_matrix, display_labels = list(set(pred_tags).union((set(test_data_tags)))))
-    cm_display.plot()
-    plt.xticks(rotation = 90)
-    plt.show()
 
-def testing(test_set):
-    # choose random 20 sents only because it takes huge amount of time for evaluation
-    random.seed(1234)
-    rndom = [random.randint(1, len(test_set)) for x in range(15)]
-    test_run = [test_set[i] for i in rndom]
-    test_run_base = [tup for sent in test_run for tup in sent]
-    test_tagged_words = [tup[0] for sent in test_run for tup in sent]
 
-    # tagging the test sentences
-    tagged_seq = Viterbi(test_tagged_words, train_tagged_words, create_transition_matrix(training_pos_tag_set, training_vocabulary_set, train_tagged_words))
 
-    # accuracy
-    viterbi_word_check = [i for i, j in zip(tagged_seq, test_run_base) if i == j]
-    viterbi_accuracy = len(viterbi_word_check)/len(tagged_seq) * 100
-    print('Viterbi Algorithm Accuracy: ', viterbi_accuracy)
-    print('\n')
-    return test_run_base, tagged_seq
-
-def accuracy_per_tag(y_act, y_pred):
-    d = {}
-    for i in range(len(y_act)):
-      if y_act[i] in d:
-        if y_act[i] == y_pred[i]:
-          d[y_act[i]] += [1]
-        else:
-          d[y_act[i]] += [0]
-      else:
-        if y_act[i] == y_pred[i]:
-          d[y_act[i]] = [1]
-        else:
-          d[y_act[i]] = [0]
-
-    accuracy_dict = {}
-    for i in d:
-      accuracy_dict[i] = sum(d[i])/len(d[i])
-    return accuracy_dict
 
 
 def predict_POS(sent):
@@ -187,13 +141,13 @@ def predict_POS(sent):
   words.append(Viterbi(sent.split(), train_tagged_words, create_transition_matrix(training_pos_tag_set, training_vocabulary_set, train_tagged_words)))
   return(words)
 
-predict_POS('You are not so looking well')
 
 st.title("POS Tagging using Viterbi Algorithm") 
 st.title("Wait for few seconds after enterring sentence..") 
 input = st.text_input("Enter the sentence 👇🏻") 
-output = predict_POS(input)
+
 if input:
+    output = predict_POS(input)
     st.write("POS tagging")
     for i in output[0]:
         st.write(str(i[0]) + ' - ' + str(i[1]))
