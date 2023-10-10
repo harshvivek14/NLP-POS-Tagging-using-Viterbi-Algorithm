@@ -174,9 +174,9 @@ st.write("Group: Harshvivek, Udhay, Chetan\n\n")
 input = st.text_input("Enter the sentence 👇🏻\n") 
 
 if input:
-    st.write("Processing..\n\n") 
+    st.write("Processing... please wait\n\n") 
     output = predict_POS(input)
-    st.write("\nPOS tagging: \n")
+    st.write("\nPOS tagging for: "+ input+ "\n")
     for i in output[0]:
         st.write(str(i[0]) + ' - ' + str(i[1]))
 
