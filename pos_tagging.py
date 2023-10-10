@@ -18,7 +18,6 @@ from nltk.corpus import treebank
 
 data = list(nltk.corpus.treebank.tagged_sents(tagset='universal'))
 
-"""### Working on Data"""
 
 # Creating list of train and test tagged words
 
@@ -109,7 +108,6 @@ def create_transition_matrix(training_pos_tag_set, training_vocabulary_set, trai
 
     return df
 
-"""### Viterbi Algorithm"""
 
 # Viterbi Algorithm
 
@@ -165,22 +163,23 @@ def Viterbi(words, train_tagged_words, tags_df):
     return list(zip(words, state)), tags_df
 
 
-"""### Predict"""
 
 def predict_POS(sent):
     words = []
     train_tagged_words, test_tagged_words, train_tagged_tokens, train_tagged_pos_tokens, training_vocabulary_set, training_pos_tag_set = get_words(data, [])
-    words.append(Viterbi(sent.split(), train_tagged_words, create_transition_matrix(training_pos_tag_set, training_vocabulary_set, train_tagged_words))[0])
-    print(words)
+    words.append(Viterbi(nltk.word_tokenize(sent), train_tagged_words, create_transition_matrix(training_pos_tag_set, training_vocabulary_set, train_tagged_words))[0])
+    return words
 
 
 st.title("POS Tagging using Viterbi Algorithm") 
-st.write("Group: Harshvivek, Udhay, Chetan\n\n") 
-st.write("Wait for few seconds after enterring sentence..\n\n") 
+st.write("Group: Harshvivek, Udhay, Chetan\n\n")
 input = st.text_input("Enter the sentence 👇🏻\n") 
 
 if input:
+    st.write("Processing..\n\n") 
     output = predict_POS(input)
     st.write("\nPOS tagging: \n")
     for i in output[0]:
         st.write(str(i[0]) + ' - ' + str(i[1]))
+
+
