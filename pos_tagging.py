@@ -5,12 +5,10 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
-import random
-import matplotlib.pyplot as plt
-from sklearn.model_selection import KFold
-from sklearn.metrics import precision_score, recall_score, f1_score, fbeta_score, confusion_matrix, ConfusionMatrixDisplay, classification_report
+from nltk.tokenize import word_tokenize 
 
 import nltk
+nltk.download('punkt')
 nltk.download('treebank')
 nltk.download('universal_tagset')
 
@@ -167,7 +165,7 @@ def Viterbi(words, train_tagged_words, tags_df):
 def predict_POS(sent):
     words = []
     train_tagged_words, test_tagged_words, train_tagged_tokens, train_tagged_pos_tokens, training_vocabulary_set, training_pos_tag_set = get_words(data, [])
-    words.append(Viterbi(nltk.word_tokenize(sent), train_tagged_words, create_transition_matrix(training_pos_tag_set, training_vocabulary_set, train_tagged_words))[0])
+    words.append(Viterbi(word_tokenize(sent), train_tagged_words, create_transition_matrix(training_pos_tag_set, training_vocabulary_set, train_tagged_words))[0])
     return words
 
 
